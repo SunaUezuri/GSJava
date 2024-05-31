@@ -19,13 +19,12 @@ public abstract class Pessoa {
     }
 
     //Criando o construtor da classe
-    public Pessoa(int id, String cpf, String nome, Genero genero, String dataNasc, boolean cpfValido) {
+    public Pessoa(int id, String cpf, String nome, Genero genero, String dataNasc) {
         this.id = id;
         this.cpf = cpf;
         this.nome = nome;
         this.genero = genero;
         this.dataNasc = dataNasc;
-        this.cpfValido = cpfValido;
     }
 
     //Getters and Setters da classe

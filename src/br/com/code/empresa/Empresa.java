@@ -20,12 +20,11 @@ public class Empresa {
     }
 
     //Construtor
-    public Empresa(String cnpj, String nome, Endereco endereco, String telefone, boolean cnpjValida) {
+    public Empresa(String cnpj, String nome, Endereco endereco, String telefone) {
         this.cnpj = cnpj;
         this.nome = nome;
         this.endereco = endereco;
         this.telefone = telefone;
-        this.cnpjValida = cnpjValida;
     }
 
     //Getters and Setters
