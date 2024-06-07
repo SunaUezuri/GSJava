@@ -3,7 +3,7 @@ package br.com.code.usuarios;
 public class Cliente extends Pessoa{
     private Endereco endereco;
     private String telefone;
-    protected int pontos = 0;
+    protected double pontos = 0;
     protected double lixoDescartado;
 
     //Exibindo as informações
@@ -40,7 +40,7 @@ public class Cliente extends Pessoa{
         this.telefone = telefone;
     }
 
-    public int getPontos() {
+    public double getPontos() {
         return pontos;
     }
 
@@ -55,30 +55,55 @@ public class Cliente extends Pessoa{
     //Método para calcular os pontos
 
     //Calculando por peso
-    public int calculaPontos(double peso){
-        if (peso >= 5 && peso <= 9){
-            pontos += 1;
-        } else if (peso >= 10) {
-            pontos += 2;
+    public double calculaPontos(String tipo, double peso){
+        switch (tipo){
+
+            case "lata", "Latinha", "Lata", "latinha":
+                if (peso >= 1){
+
+                    pontos = peso * 750;
+                    break;
+                }
+
+            case "Papelão", "papelão":
+                if (peso >= 1){
+
+                    pontos = peso * 110;
+                    break;
+                }
+
+            case "Plástico", "plastico", "plástico":
+                if (peso >= 1){
+
+                    pontos = peso * 125;
+                    break;
+                }
+
+            case "papel", "Papel":
+                if (peso >= 1){
+
+                    pontos = peso * 144;
+                    break;
+                }
+
+            case "Orgânico", "orgânico":
+                if (peso >= 1){
+                    pontos = peso * 100;
+                    break;
+                }
+
         }
+
         return pontos;
     }
 
     //Calculando por quantidade
-    public int calculaPontos(int quantidade){
-        if (quantidade >= 10 && quantidade <= 14){
-            pontos += 1;
-        } else if (quantidade >= 15){
-            pontos += 2;
+    public double calculaPontos(String tipo, int quantidade){
+        if (tipo.equalsIgnoreCase("Garrafa") && quantidade >= 10){
+
+            pontos = (quantidade / 10.0) * 275;
         }
         return pontos;
     }
 
-    //Calculando um bônus caso o descartável seja Plático
-    public int calculaPontos(String tipo){
-        if (tipo.equalsIgnoreCase("plastico")){
-            pontos += 5;
-        }
-        return pontos;
-    }
 }

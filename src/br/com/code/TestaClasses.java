@@ -60,8 +60,80 @@ public class TestaClasses {
         //Instanciando um cliente
         Cliente alexandra = new Cliente(15, cpf, nome, genero, dataNasc, enderecoCliente, telefone);
 
-        //Inserindo a mensagem que mostra os dados
-        JOptionPane.showMessageDialog(null, alexandra);
+        //Não permitindo o cadastro caso o CPF esteja inválido
+        if (alexandra.validaCpf(cpf) == true){
+            //Inserindo a mensagem que mostra os dados
+            JOptionPane.showMessageDialog(null, alexandra);
+
+            String confirmacao = JOptionPane.showInputDialog
+                    ("Você gostaria de colocar o resíduo do qual você descartará?(s/n)");
+
+            //Iniciando o sistema de descarte
+            if (confirmacao.equalsIgnoreCase("s")){
+
+                //Pegando as informações
+                CategoriaLixo categoria = CategoriaLixo.valueOf
+                        (JOptionPane.showInputDialog("Qual a categoria do seu lixo?(DOMESTICO, HOSPITALAR, EMPRESARIAL)"));
+                double peso = Double.parseDouble(JOptionPane.showInputDialog("Qual o peso do que você quer descartar?"));
+                int quantidade = Integer.parseInt(JOptionPane.showInputDialog("E qual a quantidade?"));
+                String data = JOptionPane.showInputDialog("Qual a data da qual você quer descartar?");
+
+                String tipoLixo = JOptionPane.showInputDialog("Qual tipo de lixo você quer descartar?(Orgânico ou Reciclável");
+
+                //Registrando o tipo de de lixo específico
+                if (tipoLixo.equalsIgnoreCase("Reciclável")){
+                    String produto = JOptionPane.showInputDialog("Qual o produto do qual você vai descartar?");
+                    String material = JOptionPane.showInputDialog("E qual o tipo de material?");
+
+                    Reciclavel recicla = new Reciclavel(categoria, peso, quantidade, data, produto, material);
+                    JOptionPane.showMessageDialog(null, recicla);
+
+                    JOptionPane.showMessageDialog(null, "O ponto de coleta mais " +
+                            "próximo localizado é o: " + "\n" + adolfo);
+
+                    String simNao = JOptionPane.showInputDialog("Gostaria de que uma empresa coletasse o lixo?(s/n)");
+
+                    if (simNao.equalsIgnoreCase("s")){
+                        JOptionPane.showMessageDialog(null, "A empresa que irá coletar é a " + "\n" + luvitec);
+                        JOptionPane.showMessageDialog(null, "O funcionário que irá coletar é:" + "\n"
+                                + judas);
+                        JOptionPane.showMessageDialog(null, "Ele estará em um: " + "\n" + saveiro);
+                    }
+
+                    JOptionPane.showMessageDialog(null, "Após o descarte a quantidade de pontos foi atualizada!");
+
+                    //Calculando os pontos
+                    alexandra.calculaPontos(material, peso);
+                    alexandra.calculaPontos(produto, quantidade);
+
+                    //Mostrando os pontos
+                    JOptionPane.showMessageDialog(null, "Número de pontos: " + alexandra.getPontos());
+
+                } else if (tipoLixo.equalsIgnoreCase("Orgânico")){
+                    String tipo = JOptionPane.showInputDialog("Qual o tipo de alimento?");
+                    String dataDescarte = JOptionPane.showInputDialog("Qual foi a data que você descartou?");
+
+                    Organico organ = new Organico(categoria, peso, quantidade, data, tipo, dataDescarte);
+                    JOptionPane.showMessageDialog(null, organ);
+
+                    //Calculando os pontos
+                    alexandra.calculaPontos(tipoLixo, peso);
+
+                    //Mostrando os pontos
+                    JOptionPane.showMessageDialog(null, "Número de pontos: " + alexandra.getPontos());
+
+                }
+            }else {
+                JOptionPane.showMessageDialog(null, "Entendido! Obrigado pela preferência.");
+            }
+
+            JOptionPane.showMessageDialog(null, "Obrigado pela preferência!!!");
+
+        }else {
+            JOptionPane.showMessageDialog(null, "CPF inválido!!!");
+        }
+
+
 
     }
 }
